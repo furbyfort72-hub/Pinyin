@@ -27,11 +27,15 @@ jobs:
 
       - name: Compila
         working-directory: proj
-        run: gradle assembleDebug --no-daemon
+        run: |
+          sed -i 's/pinyin4j:2.5.1/pinyin4j:2.5.0/' app/build.gradle.kts
+          gradle assembleDebug --no-daemon
 
       - name: Pubblica l'APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "build-${{ github.run_number }}" \
-            proj/app/build/outputs/apk/de
+            proj/app/build/outputs/apk/debug/app-debug.apk \
+            --title "Build ${{ github.run_number }}" \
+            --notes "APK di prova"
