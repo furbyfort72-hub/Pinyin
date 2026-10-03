@@ -28,7 +28,7 @@ jobs:
       - name: Compila
         working-directory: proj
         run: |
-          sed -i 's/pinyin4j:2.5.1/pinyin4j:2.5.0/' app/build.gradle.kts
+          sed -i 's#net.sourceforge.pinyin4j:pinyin4j:2.5.1#com.belerweb:pinyin4j:2.5.0#' app/build.gradle.kts
           gradle assembleDebug --no-daemon
 
       - name: Pubblica l'APK
